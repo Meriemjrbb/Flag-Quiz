@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flag Quiz</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body id="app">
+  <% if (locals.wasCorrect === false) { %>
+    <div class="game-over">
+      <h2>Game Over! 😢</h2>
+      <p>Final Score: <%= locals.totalScore %></p>
+      <a href="/" class="restart-button">Restart</a>
+    </div>
+  <% } else { %>
+    <form class="container" action="/submit" method="post">
+      <div class="horizontal-container">
+        <h3>
+          Total Score:
+          <span id="score">
+            <%= locals.totalScore ? totalScore : "0" %>
+          </span>
+        </h3>
+      </div>
+
+      <h1 id="countryFlag">
+        <%= question.flag %>
+      </h1>
+
+      <div class="answer-container">
+        <input type="text" name="answer" id="userInput" placeholder="Name the country" autofocus autocomplete="off">
+      </div>
+
+      <button type="submit">SUBMIT
+        <% if (locals.wasCorrect) { %>
+          <span class="checkmark">✔</span>
+        <% } else if (locals.wasCorrect === false) { %>
+          <span class="cross" id="error">✖</span>
+        <% } %>
+      </button>
+    </form>
+  <% } %>
+</body>
+
+</html>
