@@ -27,7 +27,10 @@
       </div>
 
       <h1 id="countryFlag">
-        <%= question.flag %>
+        <img src="https://flagcdn.com/w320/<%= question.code %>.png"
+             alt="Flag to guess"
+             style="height: 120px; max-width: 100%; border: 1px solid #ddd; border-radius: 4px;"
+             onerror="this.replaceWith(document.createTextNode('<%= question.flag %>'))">
       </h1>
       <!-- État du jeu transmis au serveur à chaque réponse -->
       <input type="hidden" name="flagName" value="<%= question.name %>">
