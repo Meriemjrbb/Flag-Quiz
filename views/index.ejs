@@ -29,6 +29,9 @@
       <h1 id="countryFlag">
         <%= question.flag %>
       </h1>
+      <!-- État du jeu transmis au serveur à chaque réponse -->
+      <input type="hidden" name="flagName" value="<%= question.name %>">
+      <input type="hidden" name="score" value="<%= locals.totalScore || 0 %>">
 
       <div class="answer-container">
         <input type="text" name="answer" id="userInput" placeholder="Name the country" autofocus autocomplete="off">
