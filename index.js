@@ -48,9 +48,19 @@ async function getQuiz() {
   return quizCache;
 }
 
+// Un emoji drapeau = 2 "lettres régionales" Unicode. On les convertit en code pays
+// ISO (ex. 🇱🇦 -> "la") pour afficher une VRAIE image : Windows n'affiche pas les
+// emojis de drapeaux (il montre seulement les 2 lettres).
+function flagToCode(flag) {
+  return [...flag]
+    .map((c) => String.fromCharCode(c.codePointAt(0) - 0x1f1e6 + 97))
+    .join("");
+}
+
 async function randomQuestion() {
   const quiz = await getQuiz();
-  return quiz[Math.floor(Math.random() * quiz.length)];
+  const q = quiz[Math.floor(Math.random() * quiz.length)];
+  return { ...q, code: flagToCode(q.flag) };
 }
 
 // --- Routes ------------------------------------------------------------------
